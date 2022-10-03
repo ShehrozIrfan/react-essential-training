@@ -16,18 +16,29 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      let monday = "Monday";
-      let tuesday = "Tuesday";
-      let wednesday = "Wednesday";
-      let name = "Shehroz";
+      function Header() {
+        return (
+          <h3>Comment Tree App</h3>
+        )
+      }
+
+      function Main() {
+        return (
+          <div>Hey! It's the comment tree app.</div>
+        )
+      }
+
+      function App() {
+        return (
+          <div>
+            <Header />
+            <Main />
+          </div>
+        )
+      }
+
       ReactDOM.render(
-        <ul>
-          <li>{monday}</li>
-          <li>{tuesday}</li>
-          <li>{wednesday}</li>
-          <li>{name.toUpperCase()}</li>
-          <li>{name.length}</li>
-        </ul>,
+        <App />,
         document.getElementById("root")
       );
     </script>
