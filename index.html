@@ -16,11 +16,17 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+      let monday = "Monday";
+      let tuesday = "Tuesday";
+      let wednesday = "Wednesday";
+      let name = "Shehroz";
       ReactDOM.render(
         <ul>
-          <li>Monday</li>
-          <li>Tuesday</li>
-          <li>Wednesday</li>
+          <li>{monday}</li>
+          <li>{tuesday}</li>
+          <li>{wednesday}</li>
+          <li>{name.toUpperCase()}</li>
+          <li>{name.length}</li>
         </ul>,
         document.getElementById("root")
       );
