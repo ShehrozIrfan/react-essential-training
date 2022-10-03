@@ -16,23 +16,32 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
-      function Header() {
+      function Header(props) {
         return (
-          <h3>Comment Tree App</h3>
+          <h3>{props.name}'s Garage</h3>
         )
       }
 
-      function Main() {
+      function Main(props) {
         return (
-          <div>Hey! It's the comment tree app.</div>
+          <div>Hey! We have the most {props.adjective} cars.</div>
+        )
+      }
+
+      function Footer(props) {
+        return (
+          <footer>
+            Copyright &copy; {props.year}
+          </footer>
         )
       }
 
       function App() {
         return (
           <div>
-            <Header />
-            <Main />
+            <Header name="Alexa" />
+            <Main adjective="classical" />
+            <Footer year={new Date().getFullYear()} />
           </div>
         )
       }
