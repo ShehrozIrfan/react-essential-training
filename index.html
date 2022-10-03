@@ -15,13 +15,15 @@
   <body>
     <div id="root"></div>
     <script type="text/javascript">
-      let heading = React.createElement(
-                      "h1",
-                      null,
-                      "Getting Started with React!"
-                    );
+      let ul = React.createElement(
+        "ul",
+        { style: { color: "hotpink" } },
+        React.createElement("li", null, "Monday"),
+        React.createElement("li", null, "Tuesday"),
+        React.createElement("li", null, "Wednesday")
+      );
       ReactDOM.render(
-        heading,
+        ul,
         document.getElementById("root")
       );
     </script>
