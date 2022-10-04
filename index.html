@@ -20,8 +20,14 @@
       const cars = [
         'Toyata Corolla x',
         'Honda Civic',
-        'Suzuki Swift'
+        'Suzuki Swift',
+        'Fortuner'
       ]
+
+      const carObjects = cars.map((car, index) => ({
+        id: index,
+        title: car
+      }))
 
       function Header(props) {
         return (
@@ -32,7 +38,7 @@
       function Main(props) {
         return (
           <div>
-            <div>{props.cars.map((car) => (<li>{car}</li>))}</div>
+            <div>{props.cars.map((car) => (<li key={car.id}>{car.title}</li>))}</div>
             <br/>
             <div>Hey! We have the most {props.adjective} cars.</div>
           </div>
@@ -51,7 +57,7 @@
         return (
           <div>
             <Header name="Alexa" />
-            <Main adjective="classical" cars={cars} />
+            <Main adjective="classical" cars={carObjects} />
             <Footer year={new Date().getFullYear()} />
           </div>
         )
