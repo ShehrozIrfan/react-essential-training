@@ -37,11 +37,16 @@
 
       function Main(props) {
         return (
-          <div>
-            <div>{props.cars.map((car) => (<li key={car.id}>{car.title}</li>))}</div>
-            <br/>
-            <div>Hey! We have the most {props.adjective} cars.</div>
-          </div>
+          <section>
+            <img
+              src="./car.jpeg"
+              height={200}
+              alt="Car"
+             />
+            <ul>
+              { props.cars.map((car) => (<li key={car.id}>{car.title}</li>)) }
+            </ul>
+          </section>
         )
       }
 
