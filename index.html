@@ -16,6 +16,13 @@
   <body>
     <div id="root"></div>
     <script type="text/babel">
+
+      const cars = [
+        'Toyata Corolla x',
+        'Honda Civic',
+        'Suzuki Swift'
+      ]
+
       function Header(props) {
         return (
           <h3>{props.name}'s Garage</h3>
@@ -24,7 +31,11 @@
 
       function Main(props) {
         return (
-          <div>Hey! We have the most {props.adjective} cars.</div>
+          <div>
+            <div>{props.cars.map((car) => (<li>{car}</li>))}</div>
+            <br/>
+            <div>Hey! We have the most {props.adjective} cars.</div>
+          </div>
         )
       }
 
@@ -40,7 +51,7 @@
         return (
           <div>
             <Header name="Alexa" />
-            <Main adjective="classical" />
+            <Main adjective="classical" cars={cars} />
             <Footer year={new Date().getFullYear()} />
           </div>
         )
