@@ -31,7 +31,9 @@
 
       function Header(props) {
         return (
-          <h3>{props.name}'s Garage</h3>
+          <header>
+            <h3>{props.name}'s Garage</h3>
+          </header>
         )
       }
 
@@ -60,11 +62,11 @@
 
       function App() {
         return (
-          <div>
+          <React.Fragment>
             <Header name="Alexa" />
             <Main adjective="classical" cars={carObjects} />
             <Footer year={new Date().getFullYear()} />
-          </div>
+          </React.Fragment>
         )
       }
 
