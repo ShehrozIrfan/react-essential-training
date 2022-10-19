@@ -1,11 +1,15 @@
 import PropTypes from "prop-types";
 
-const Button = ({ text }) => {
+const Button = ({ text, classes }) => {
   return (
     <>
-      <button>{text}</button>
+      <button className={classes}>{text}</button>
     </>
   );
+};
+
+Button.defaultProps = {
+  classes: "btn btn-primary btn-sm",
 };
 
 Button.propTypes = {
