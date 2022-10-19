@@ -1,7 +1,10 @@
+import Header from "./components/Header";
+import Button from "./components/Button";
 function App() {
   return (
-    <div className="App">
-      <h1>Hello from React</h1>
+    <div>
+      <Header title="Task Tracker App" />
+      <Button text="Add" />
     </div>
   );
 }
