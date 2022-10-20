@@ -2,24 +2,26 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Button from "./components/Button";
 import Tasks from "./components/Tasks";
+import AddTask from "./components/AddTask";
+
 function App() {
   const [tasks, setTasks] = useState([
     {
       id: 1,
       text: "Doctor Appointment",
-      time: "10:40 PM",
+      date: "10:40 PM",
       reminder: true,
     },
     {
       id: 2,
       text: "Read Book",
-      time: "6:00 PM",
+      date: "6:00 PM",
       reminder: true,
     },
     {
       id: 3,
       text: "Have Lunch",
-      time: "1:15 PM",
+      date: "1:15 PM",
       reminder: true,
     },
   ]);
@@ -41,6 +43,13 @@ function App() {
     );
   };
 
+  const addTask = (task) => {
+    //generating a random id
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newTask = { id, ...task };
+    setTasks([...tasks, newTask]);
+  };
+
   return (
     <div className="container">
       <Header title="Task Tracker App" />
@@ -49,6 +58,7 @@ function App() {
         classes="btn btn-primary btn-sm"
         onClick={handleClick}
       />
+      <AddTask addTask={addTask} />
       {tasks.length > 0 ? (
         <Tasks
           tasks={tasks}

@@ -13,7 +13,7 @@ const Task = ({ task, onDelete, toggleReminder }) => {
           onClick={() => onDelete(task.id)}
         />
       </h3>
-      <p>{task.time}</p>
+      <p>{task.date}</p>
     </div>
   );
 };
