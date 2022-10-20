@@ -1,7 +1,11 @@
 import { FaTimes } from "react-icons/fa";
-const Task = ({ task, onDelete }) => {
+const Task = ({ task, onDelete, toggleReminder }) => {
   return (
-    <div>
+    //TODO: Need to add the styles, when the reminder is true
+    <div
+      onDoubleClick={() => toggleReminder(task.id)}
+      style={{ cursor: "pointer" }}
+    >
       <h3>
         {task.text}{" "}
         <FaTimes
