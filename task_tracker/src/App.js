@@ -28,6 +28,10 @@ function App() {
     console.log("Click", e);
   };
 
+  const handleDelete = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
+
   return (
     <div className="container">
       <Header title="Task Tracker App" />
@@ -36,7 +40,11 @@ function App() {
         classes="btn btn-primary btn-sm"
         onClick={handleClick}
       />
-      <Tasks tasks={tasks} />
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={handleDelete} />
+      ) : (
+        <h5>No tasks found!</h5>
+      )}
     </div>
   );
 }
