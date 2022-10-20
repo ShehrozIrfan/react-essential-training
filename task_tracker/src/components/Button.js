@@ -1,10 +1,13 @@
 import PropTypes from "prop-types";
 
-const Button = ({ text, classes, onClick }) => {
+const Button = ({ text, classes, onAdd, showAddTask }) => {
   return (
     <>
-      <button className={classes} onClick={onClick}>
-        {text}
+      <button
+        className={showAddTask ? "btn btn-danger btn-sm" : classes}
+        onClick={onAdd}
+      >
+        {showAddTask ? "Close" : text}
       </button>
     </>
   );

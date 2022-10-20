@@ -5,6 +5,8 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false);
+
   const [tasks, setTasks] = useState([
     {
       id: 1,
@@ -35,7 +37,6 @@ function App() {
   };
 
   const toggleReminder = (id) => {
-    console.log("Toggle", id);
     setTasks(
       tasks.map((task) =>
         task.id === id ? { ...task, reminder: !task.reminder } : task
@@ -56,9 +57,10 @@ function App() {
       <Button
         text="Add"
         classes="btn btn-primary btn-sm"
-        onClick={handleClick}
+        onAdd={() => setShowAddTask(!showAddTask)}
+        showAddTask={showAddTask}
       />
-      <AddTask addTask={addTask} />
+      {showAddTask && <AddTask addTask={addTask} />}
       {tasks.length > 0 ? (
         <Tasks
           tasks={tasks}
