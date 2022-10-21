@@ -25,7 +25,10 @@ function App() {
     return data;
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
+    await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "DELETE",
+    });
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
