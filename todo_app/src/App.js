@@ -1,7 +1,8 @@
 import "./App.css";
 import { useState } from "react";
 import Header from "./components/Header";
-import Items from "./components/Items";
+import Todos from "./components/Todos";
+import AddTodo from "./components/AddTodo";
 function App() {
   const [todoList, setTodoList] = useState([
     {
@@ -30,11 +31,19 @@ function App() {
     const newTodoList = todoList.filter((item) => item.id != id);
     setTodoList([...newTodoList]);
   };
+
+  const addTodo = (todo) => {
+    const id = Math.floor(Math.random() * 10000) + 1;
+    const newTodo = { id: id, text: todo, completed: false };
+    setTodoList([...todoList, newTodo]);
+  };
+
   return (
     <div className="container">
       <Header />
+      <AddTodo addTodo={addTodo} />
       {todoList.length > 0 ? (
-        <Items items={todoList} handleDelete={handleDelete} />
+        <Todos items={todoList} handleDelete={handleDelete} />
       ) : (
         "No Todo found! Try adding one"
       )}

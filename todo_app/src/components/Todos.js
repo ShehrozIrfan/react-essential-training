@@ -1,4 +1,4 @@
-const Items = ({ items, handleDelete }) => {
+const Todos = ({ items, handleDelete }) => {
   return (
     <div>
       {items.map((item) => (
@@ -13,4 +13,4 @@ const Items = ({ items, handleDelete }) => {
   );
 };
 
-export default Items;
+export default Todos;
