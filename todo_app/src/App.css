@@ -1,0 +1,26 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.header,
+.items-list {
+  justify-content: space-between;
+}
+
+.items-list {
+  cursor: pointer;
+}
+
+.item-line-through {
+  text-decoration: line-through;
+}
+
+.form-check-label {
+  padding: 10px 10px 0px 0px;
+}
+
+.form-check-input {
+  margin-top: 13px !important;
+}
