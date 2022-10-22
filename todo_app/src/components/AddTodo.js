@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 const AddTodo = ({ addTodo }) => {
   const [text, setText] = useState("");
 
@@ -15,6 +16,7 @@ const AddTodo = ({ addTodo }) => {
 
     setText("");
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -29,8 +31,8 @@ const AddTodo = ({ addTodo }) => {
           />
         </div>
         <div className="form-group">
-          <button type="submit" className="btn btn-primary w-100 mt-2 mb-2">
-            Save
+          <button type="submit" className="btn btn-add-todo w-100 mt-2 mb-2">
+            Add ToDo
           </button>
         </div>
       </form>

@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: linear-gradient(to right, #d488f8, #9356f1, #a769f2);
+}
+
 .header,
 .items-list {
   justify-content: space-between;
@@ -23,4 +28,38 @@
 
 .form-check-input {
   margin-top: 13px !important;
+}
+
+.btn-add-todo {
+  background-color: #7f52eb !important;
+  color: white !important;
+}
+
+.wrap {
+  background: white;
+  padding: 30px 25px;
+  border-radius: 10px;
+}
+
+.items-list-wrap {
+  border-bottom: 1px solid lightgrey;
+  padding: 15px 0px;
+  align-items: center;
+}
+
+.pr-10 {
+  padding-right: 10px;
+}
+
+.no-todo {
+  margin: 20px 0px;
+  padding: 10px;
+  border: 1px solid purple;
+  border-radius: 5px;
+}
+
+.center-vertically {
+  display: flex;
+  align-items: center;
+  height: 100vh;
 }
