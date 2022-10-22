@@ -2,7 +2,7 @@ const header = () => {
   return (
     <div className="row">
       <div className="col-md-12">
-        <div className="header">
+        <div className="d-flex header">
           <div>
             <h3>ToDo App</h3>
           </div>

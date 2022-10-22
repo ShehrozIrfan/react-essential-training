@@ -3,6 +3,8 @@ import { useState } from "react";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
+import EditTodo from "./components/EditTodo";
+
 function App() {
   const [todoList, setTodoList] = useState([
     {
@@ -27,6 +29,11 @@ function App() {
     },
   ]);
 
+  const [show, setShow] = useState({
+    value: false,
+    item: {},
+  });
+
   const handleDelete = (id) => {
     const newTodoList = todoList.filter((item) => item.id !== id);
     setTodoList([...newTodoList]);
@@ -39,9 +46,31 @@ function App() {
   };
 
   const handleComplete = (id) => {
-    console.log(`Complete: ${id}`);
     const newTodoList = todoList.map((item) =>
       item.id === id ? { ...item, completed: !item.completed } : item
+    );
+
+    setTodoList(newTodoList);
+  };
+
+  const handleEdit = (item) => {
+    console.log("handle edit");
+    console.log(item);
+    setShow({
+      value: true,
+      item: item,
+    });
+  };
+
+  const handleClose = () => setShow({ value: false, item: {} });
+
+  const handleEditItem = (item_edit) => {
+    // closes the modal
+    handleClose();
+    const newTodoList = todoList.map((item) =>
+      item.id === item_edit.id
+        ? { ...item, text: item_edit.text, completed: item_edit.completed }
+        : item
     );
 
     setTodoList(newTodoList);
@@ -56,10 +85,18 @@ function App() {
           items={todoList}
           handleDelete={handleDelete}
           handleComplete={handleComplete}
+          handleEdit={handleEdit}
         />
       ) : (
         "No Todo found! Try adding one"
       )}
+      <EditTodo
+        handleEdit={handleEdit}
+        show={show.value}
+        handleClose={handleClose}
+        item={show.item}
+        handleEditItem={handleEditItem}
+      />
     </div>
   );
 }

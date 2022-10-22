@@ -6,7 +6,6 @@
 
 .header,
 .items-list {
-  display: flex;
   justify-content: space-between;
 }
 
@@ -16,4 +15,12 @@
 
 .item-line-through {
   text-decoration: line-through;
+}
+
+.form-check-label {
+  padding: 10px 10px 0px 0px;
+}
+
+.form-check-input {
+  margin-top: 13px !important;
 }

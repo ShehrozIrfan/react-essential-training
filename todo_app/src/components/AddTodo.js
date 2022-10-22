@@ -4,6 +4,13 @@ const AddTodo = ({ addTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    //Adding some validation
+    if (text.trim() === "") {
+      alert("Please enter text!");
+      return;
+    }
+
     addTodo(text);
 
     setText("");
