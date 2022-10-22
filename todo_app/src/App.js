@@ -28,7 +28,7 @@ function App() {
   ]);
 
   const handleDelete = (id) => {
-    const newTodoList = todoList.filter((item) => item.id != id);
+    const newTodoList = todoList.filter((item) => item.id !== id);
     setTodoList([...newTodoList]);
   };
 
@@ -38,12 +38,25 @@ function App() {
     setTodoList([...todoList, newTodo]);
   };
 
+  const handleComplete = (id) => {
+    console.log(`Complete: ${id}`);
+    const newTodoList = todoList.map((item) =>
+      item.id === id ? { ...item, completed: !item.completed } : item
+    );
+
+    setTodoList(newTodoList);
+  };
+
   return (
     <div className="container">
       <Header />
       <AddTodo addTodo={addTodo} />
       {todoList.length > 0 ? (
-        <Todos items={todoList} handleDelete={handleDelete} />
+        <Todos
+          items={todoList}
+          handleDelete={handleDelete}
+          handleComplete={handleComplete}
+        />
       ) : (
         "No Todo found! Try adding one"
       )}
