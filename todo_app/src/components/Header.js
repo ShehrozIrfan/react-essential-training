@@ -1,4 +1,4 @@
-const header = () => {
+const header = ({ showAdd, handleShowAdd }) => {
   return (
     <div className="row">
       <div className="col-md-12">
@@ -7,7 +7,14 @@ const header = () => {
             <h3>ToDo App</h3>
           </div>
           <div>
-            <button>Add</button>
+            <button
+              onClick={handleShowAdd}
+              className={
+                showAdd ? "btn btn-danger btn-sm" : "btn btn-success btn-sm"
+              }
+            >
+              {showAdd ? "Close" : "Add"}
+            </button>
           </div>
         </div>
       </div>
