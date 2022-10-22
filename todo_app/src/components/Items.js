@@ -1,11 +1,11 @@
-const Items = ({ items }) => {
+const Items = ({ items, handleDelete }) => {
   return (
     <div>
       {items.map((item) => (
-        <div className="items-list">
+        <div className="items-list" key={item.id}>
           <div>{item.text}</div>
           <div>
-            <button>Delete</button>
+            <button onClick={() => handleDelete(item.id)}>Delete</button>
           </div>
         </div>
       ))}

@@ -25,10 +25,19 @@ function App() {
       completed: false,
     },
   ]);
+
+  const handleDelete = (id) => {
+    const newTodoList = todoList.filter((item) => item.id != id);
+    setTodoList([...newTodoList]);
+  };
   return (
     <div className="container">
       <Header />
-      <Items items={todoList} />
+      {todoList.length > 0 ? (
+        <Items items={todoList} handleDelete={handleDelete} />
+      ) : (
+        "No Todo found! Try adding one"
+      )}
     </div>
   );
 }
