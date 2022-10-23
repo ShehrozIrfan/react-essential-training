@@ -2,26 +2,26 @@ import { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 
 const EditTodo = ({ item, handleClose, handleEditItem, show }) => {
-  const [editItem, setEditItem] = useState("");
+  const [text, setText] = useState("");
+  const [completed, setCompleted] = useState("");
 
   //using use effect to set the item, because if I do it directly in the useState, it didn't set properly as it sets only the first time, so we need to set the item every time when the props.item changes.
   useEffect(() => {
-    setEditItem({
-      text: item.text,
-      completed: item.completed,
-    });
+    setText(item.text);
+    setCompleted(item.completed);
   }, [item]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = {
       id: item.id,
-      text: editItem.text,
-      completed: editItem.completed,
+      text: text,
+      completed: completed,
     };
     handleEditItem(newItem);
 
-    setEditItem("");
+    setText("");
+    setCompleted("");
   };
 
   return (
@@ -40,9 +40,9 @@ const EditTodo = ({ item, handleClose, handleEditItem, show }) => {
             <div>
               <input
                 type="text"
-                value={editItem.text}
+                value={text}
                 className="form-control"
-                onChange={(e) => setEditItem({ ...item, text: e.target.value })}
+                onChange={(e) => setText(e.target.value)}
               />
             </div>
             <div>
@@ -50,11 +50,9 @@ const EditTodo = ({ item, handleClose, handleEditItem, show }) => {
               <input
                 className="form-check-input"
                 type="checkbox"
-                checked={editItem.completed}
-                value={editItem.completed}
-                onChange={(e) =>
-                  setEditItem({ ...item, completed: e.currentTarget.checked })
-                }
+                checked={completed}
+                value={completed}
+                onChange={(e) => setCompleted(e.currentTarget.checked)}
               />
             </div>
             <div>
