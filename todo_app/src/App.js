@@ -80,7 +80,7 @@ function App() {
               handleEdit={handleEdit}
             />
           ) : (
-            <div className="no-todo">No task ToDo... Try adding one!</div>
+            <div className="no-todo">No task ToDo...</div>
           )}
           <EditTodo
             handleEdit={handleEdit}
