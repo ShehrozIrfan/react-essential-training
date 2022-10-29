@@ -6,7 +6,94 @@ import AddTodo from "./components/AddTodo";
 import EditTodo from "./components/EditTodo";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([
+    {
+      id: 1,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 2,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 3,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 4,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 5,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 6,
+      text: "read books from hello world",
+      completed: false,
+    },
+
+    {
+      id: 7,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 8,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 9,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 10,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 11,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 12,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 13,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 14,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 15,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 16,
+      text: "read books from hello world",
+      completed: false,
+    },
+    {
+      id: 17,
+      text: "read books from hello world",
+      completed: false,
+    },
+  ]);
 
   const [show, setShow] = useState({
     value: false,
@@ -68,7 +155,7 @@ function App() {
 
   return (
     <div className="container">
-      <div className="row justify-content-center center-vertically">
+      <div className="row justify-content-center center-vertically m-2">
         <div className="col-md-6 wrap">
           <Header showAdd={showAdd} handleShowAdd={handleShowAdd} />
           {showAdd && <AddTodo addTodo={addTodo} />}
