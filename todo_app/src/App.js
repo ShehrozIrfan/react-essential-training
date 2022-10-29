@@ -4,102 +4,29 @@ import Header from "./components/Header";
 import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
 import EditTodo from "./components/EditTodo";
+import Pagination from "./components/Pagination";
 
 function App() {
-  const [todoList, setTodoList] = useState([
-    {
-      id: 1,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 2,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 3,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 4,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 5,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 6,
-      text: "read books from hello world",
-      completed: false,
-    },
+  const [todoList, setTodoList] = useState([]);
 
-    {
-      id: 7,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 8,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 9,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 10,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 11,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 12,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 13,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 14,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 15,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 16,
-      text: "read books from hello world",
-      completed: false,
-    },
-    {
-      id: 17,
-      text: "read books from hello world",
-      completed: false,
-    },
-  ]);
+  //for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const todosPerPage = 5;
+  const indexOfLastTodo = currentPage * todosPerPage;
+  const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
+  let currentTodos = todoList;
+  //we need to slice only when the length is greater than the 5. Otherwise we don't need to slice, because it fits on the same page
+  if (todoList.length > todosPerPage) {
+    currentTodos = todoList.slice(indexOfFirstTodo, indexOfLastTodo);
+  }
 
+  //for modal open, close
   const [show, setShow] = useState({
     value: false,
     item: {},
   });
 
+  //for toggling the add section
   const [showAdd, setShowAdd] = useState(false);
 
   //used to Hide/Show the Add form
@@ -109,8 +36,11 @@ function App() {
 
   //Used to delete the Todo
   const handleDelete = (id) => {
+    //deleting the todo
     const newTodoList = todoList.filter((item) => item.id !== id);
     setTodoList([...newTodoList]);
+
+    adjustTheCurrentPageAfterDeletion(newTodoList);
   };
 
   //Used to add the Todo
@@ -153,6 +83,26 @@ function App() {
     setTodoList(newTodoList);
   };
 
+  const handlePaginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  //generic functions
+  function adjustTheCurrentPageAfterDeletion(newTodoList) {
+    //getting the last page before deletion
+    const lastPageBeforeDeletion = Math.ceil(todoList.length / todosPerPage);
+
+    //adjusting the pages after deletion, so that we are only the right page after deletion
+    //we're adding checks on newTodoList, because at this moment the setTodoList is called, but the component is not re-rendered
+    //so, at this point, we're not getting the exact values, that's why using newTodoList for checks
+    if (currentPage === lastPageBeforeDeletion && newTodoList.length > 0) {
+      let lastPageAfterDeletion = Math.ceil(newTodoList.length / todosPerPage);
+      if (lastPageAfterDeletion !== lastPageBeforeDeletion) {
+        setCurrentPage(lastPageAfterDeletion);
+      }
+    }
+  }
+
   return (
     <div className="container">
       <div className="row justify-content-center center-vertically m-2">
@@ -161,7 +111,7 @@ function App() {
           {showAdd && <AddTodo addTodo={addTodo} />}
           {todoList.length > 0 ? (
             <Todos
-              items={todoList}
+              items={currentTodos}
               handleDelete={handleDelete}
               handleComplete={handleComplete}
               handleEdit={handleEdit}
@@ -176,6 +126,14 @@ function App() {
             item={show.item}
             handleEditItem={handleEditItem}
           />
+          {todoList.length > todosPerPage && (
+            <Pagination
+              todosPerPage={todosPerPage}
+              totalTodos={todoList.length}
+              handlePaginate={handlePaginate}
+              isActive={currentPage}
+            />
+          )}
         </div>
       </div>
     </div>

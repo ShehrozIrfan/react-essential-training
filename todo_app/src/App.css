@@ -63,3 +63,12 @@ body {
   align-items: center;
   height: 100vh; */
 }
+
+.center-pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.page-link {
+  cursor: pointer;
+}
