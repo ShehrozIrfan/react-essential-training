@@ -5,6 +5,7 @@ import Todos from "./components/Todos";
 import AddTodo from "./components/AddTodo";
 import EditTodo from "./components/EditTodo";
 import Pagination from "./components/Pagination";
+import _ from "lodash";
 
 function App() {
   const [todoList, setTodoList] = useState(
@@ -14,6 +15,9 @@ function App() {
   //for pagination
   const [currentPage, setCurrentPage] = useState(1);
 
+  //for sorting
+  const [sortAsc, setSortAsc] = useState(false);
+
   //storing the todos in the local storage
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoList));
@@ -22,10 +26,18 @@ function App() {
   const todosPerPage = 5;
   const indexOfLastTodo = currentPage * todosPerPage;
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
-  let currentTodos = todoList;
+
+  //using lodash to order the todos in descending order based on created_at
+  // let currentTodos = _.orderBy(todoList, ["created_at"], ["desc"]);
+  let currentTodos = sortTheTodoList(
+    todoList,
+    ["created_at"],
+    sortAsc ? ["asc"] : ["desc"]
+  );
+
   //we need to slice only when the length is greater than the 5. Otherwise we don't need to slice, because it fits on the same page
   if (todoList.length > todosPerPage) {
-    currentTodos = todoList.slice(indexOfFirstTodo, indexOfLastTodo);
+    currentTodos = currentTodos.slice(indexOfFirstTodo, indexOfLastTodo);
   }
 
   //for modal open, close
@@ -54,7 +66,12 @@ function App() {
   //Used to add the Todo
   const addTodo = (todo) => {
     const id = Math.floor(Math.random() * 10000) + 1;
-    const newTodo = { id: id, text: todo, completed: false };
+    const newTodo = {
+      id: id,
+      text: todo,
+      completed: false,
+      created_at: new Date(),
+    };
     setTodoList([...todoList, newTodo]);
   };
 
@@ -95,6 +112,10 @@ function App() {
     setCurrentPage(pageNumber);
   };
 
+  const handleSort = () => {
+    setSortAsc(!sortAsc);
+  };
+
   //generic functions
   function adjustTheCurrentPageAfterDeletion(newTodoList) {
     //getting the last page before deletion
@@ -111,6 +132,11 @@ function App() {
     }
   }
 
+  function sortTheTodoList(list, sort_by, order) {
+    //sort_by and order must be an array of strings to work properly with lodash order by
+    return _.orderBy(list, sort_by, order);
+  }
+
   return (
     <div className="container">
       <div className="row justify-content-center center-vertically m-2">
@@ -120,9 +146,11 @@ function App() {
           {todoList.length > 0 ? (
             <Todos
               items={currentTodos}
+              sortAsc={sortAsc}
               handleDelete={handleDelete}
               handleComplete={handleComplete}
               handleEdit={handleEdit}
+              handleSort={handleSort}
             />
           ) : (
             <div className="no-todo">No task ToDo...</div>
