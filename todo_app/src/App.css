@@ -72,3 +72,9 @@ body {
 .page-link {
   cursor: pointer;
 }
+
+.sort-wrap {
+  border: 1px solid lightgrey;
+  padding: 10px;
+  text-align: center;
+}
