@@ -1,8 +1,18 @@
+import { useState, useEffect } from "react";
 const Pagination = ({ todosPerPage, totalTodos, handlePaginate, isActive }) => {
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalTodos / todosPerPage); i++) {
-    pageNumbers.push(i);
-  }
+  const [pageNumbers, setPageNumbers] = useState([]);
+
+  //using useEffect, to only perform the below loop, when there is a change in the totalTodos
+  useEffect(() => {
+    const pageNumbers = [];
+
+    for (let i = 1; i <= Math.ceil(totalTodos / todosPerPage); i++) {
+      pageNumbers.push(i);
+    }
+
+    setPageNumbers(pageNumbers);
+  }, [totalTodos]);
+
   return (
     <div className="center-pagination mt-4">
       <nav>
