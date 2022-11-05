@@ -11,6 +11,10 @@ const EditTodo = ({ item, handleClose, handleEditItem, show }) => {
     setCompleted(item.completed);
   }, [item]);
 
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newItem = {
@@ -42,7 +46,7 @@ const EditTodo = ({ item, handleClose, handleEditItem, show }) => {
                 type="text"
                 value={text}
                 className="form-control"
-                onChange={(e) => setText(e.target.value)}
+                onChange={handleChange}
               />
             </div>
             <div>

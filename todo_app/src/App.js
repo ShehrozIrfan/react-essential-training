@@ -53,7 +53,7 @@ function App() {
   );
 
   //we need to slice only when the length is greater than the 5. Otherwise we don't need to slice, because it fits on the same page
-  if (todoList.length > todosPerPage) {
+  if (currentTodos.length > todosPerPage) {
     currentTodos = currentTodos.slice(indexOfFirstTodo, indexOfLastTodo);
   }
 
@@ -153,6 +153,26 @@ function App() {
     setFilteredList(todosWithStatusCompleted);
   };
 
+  const handleSearch = (searchText) => {
+    if (searchText.trim() === "") {
+      if (showStatus.showPending) {
+        handleShowPending();
+      } else if (showStatus.showCompleted) {
+        handleShowCompleted();
+      } else {
+        setFilteredList(todoList);
+      }
+    } else {
+      const filteredData = filteredList.filter((item) => {
+        return item.text.toLowerCase().includes(searchText.toLowerCase());
+      });
+
+      if (filteredData.length > 0) {
+        setFilteredList(filteredData);
+      }
+    }
+  };
+
   //generic functions
   function adjustTheCurrentPageAfterDeletion(newTodoList) {
     //getting the last page before deletion
@@ -192,9 +212,12 @@ function App() {
               handleShowAll={handleShowAll}
               handleShowPending={handleShowPending}
               handleShowCompleted={handleShowCompleted}
+              handleSearch={handleSearch}
             />
           ) : (
-            <div className="no-todo">No ToDo found...</div>
+            <div className="no-todo">
+              No ToDo found... Try adding one by clicking the add button above!
+            </div>
           )}
           <EditTodo
             handleEdit={handleEdit}
