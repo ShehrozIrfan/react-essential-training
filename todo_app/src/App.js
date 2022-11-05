@@ -53,7 +53,7 @@ function App() {
   );
 
   //we need to slice only when the length is greater than the 5. Otherwise we don't need to slice, because it fits on the same page
-  if (todoList.length > todosPerPage) {
+  if (currentTodos.length > todosPerPage) {
     currentTodos = currentTodos.slice(indexOfFirstTodo, indexOfLastTodo);
   }
 
@@ -167,11 +167,7 @@ function App() {
         return item.text.toLowerCase().includes(searchText.toLowerCase());
       });
 
-      console.log(filteredList);
-      console.log(filteredData);
-
       if (filteredData.length > 0) {
-        console.log("insideset");
         setFilteredList(filteredData);
       }
     }
@@ -219,7 +215,9 @@ function App() {
               handleSearch={handleSearch}
             />
           ) : (
-            <div className="no-todo">No ToDo found...</div>
+            <div className="no-todo">
+              No ToDo found... Try adding one by clicking the add button above!
+            </div>
           )}
           <EditTodo
             handleEdit={handleEdit}
