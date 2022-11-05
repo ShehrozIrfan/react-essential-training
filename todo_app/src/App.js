@@ -153,6 +153,30 @@ function App() {
     setFilteredList(todosWithStatusCompleted);
   };
 
+  const handleSearch = (searchText) => {
+    if (searchText.trim() === "") {
+      if (showStatus.showPending) {
+        handleShowPending();
+      } else if (showStatus.showCompleted) {
+        handleShowCompleted();
+      } else {
+        setFilteredList(todoList);
+      }
+    } else {
+      const filteredData = filteredList.filter((item) => {
+        return item.text.toLowerCase().includes(searchText.toLowerCase());
+      });
+
+      console.log(filteredList);
+      console.log(filteredData);
+
+      if (filteredData.length > 0) {
+        console.log("insideset");
+        setFilteredList(filteredData);
+      }
+    }
+  };
+
   //generic functions
   function adjustTheCurrentPageAfterDeletion(newTodoList) {
     //getting the last page before deletion
@@ -192,6 +216,7 @@ function App() {
               handleShowAll={handleShowAll}
               handleShowPending={handleShowPending}
               handleShowCompleted={handleShowCompleted}
+              handleSearch={handleSearch}
             />
           ) : (
             <div className="no-todo">No ToDo found...</div>

@@ -84,6 +84,18 @@ body {
   margin: 5px;
 }
 
+.search-wrap {
+  border-radius: 10px;
+  margin: 10px 0px;
+  position: relative;
+}
+
+.search-submit-btn {
+  position: absolute;
+  right: 6px;
+  top: 6px;
+}
+
 @media (max-width: 390px) {
   .sort-wrap button {
     font-size: 12px;
