@@ -18,9 +18,27 @@ function App() {
   //for sorting
   const [sortAsc, setSortAsc] = useState(false);
 
+  //for status
+  const [showStatus, setShowStatus] = useState({
+    showAll: true,
+    showPending: false,
+    showCompleted: false,
+  });
+
+  // for filtering
+  const [filteredList, setFilteredList] = useState(todoList);
+
   //storing the todos in the local storage
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todoList));
+
+    if (showStatus.showPending) {
+      handleShowPending();
+    } else if (showStatus.showCompleted) {
+      handleShowCompleted();
+    } else {
+      setFilteredList(todoList);
+    }
   }, [todoList]);
 
   const todosPerPage = 5;
@@ -28,9 +46,8 @@ function App() {
   const indexOfFirstTodo = indexOfLastTodo - todosPerPage;
 
   //using lodash to order the todos in descending order based on created_at
-  // let currentTodos = _.orderBy(todoList, ["created_at"], ["desc"]);
   let currentTodos = sortTheTodoList(
-    todoList,
+    filteredList,
     ["created_at"],
     sortAsc ? ["asc"] : ["desc"]
   );
@@ -116,6 +133,26 @@ function App() {
     setSortAsc(!sortAsc);
   };
 
+  const handleShowAll = () => {
+    setShowStatus({ showAll: true, showPending: false, showCompleted: false });
+
+    setFilteredList(todoList);
+  };
+
+  const handleShowPending = () => {
+    setShowStatus({ showAll: false, showPending: true, showCompleted: false });
+
+    const todosWithStatusPending = _.filter(todoList, ["completed", false]);
+    setFilteredList(todosWithStatusPending);
+  };
+
+  const handleShowCompleted = () => {
+    setShowStatus({ showAll: false, showPending: false, showCompleted: true });
+
+    const todosWithStatusCompleted = _.filter(todoList, ["completed", true]);
+    setFilteredList(todosWithStatusCompleted);
+  };
+
   //generic functions
   function adjustTheCurrentPageAfterDeletion(newTodoList) {
     //getting the last page before deletion
@@ -147,13 +184,17 @@ function App() {
             <Todos
               items={currentTodos}
               sortAsc={sortAsc}
+              showStatus={showStatus}
               handleDelete={handleDelete}
               handleComplete={handleComplete}
               handleEdit={handleEdit}
               handleSort={handleSort}
+              handleShowAll={handleShowAll}
+              handleShowPending={handleShowPending}
+              handleShowCompleted={handleShowCompleted}
             />
           ) : (
-            <div className="no-todo">No task ToDo...</div>
+            <div className="no-todo">No ToDo found...</div>
           )}
           <EditTodo
             handleEdit={handleEdit}
@@ -162,10 +203,10 @@ function App() {
             item={show.item}
             handleEditItem={handleEditItem}
           />
-          {todoList.length > todosPerPage && (
+          {filteredList.length > todosPerPage && (
             <Pagination
               todosPerPage={todosPerPage}
-              totalTodos={todoList.length}
+              totalTodos={filteredList.length}
               handlePaginate={handlePaginate}
               isActive={currentPage}
             />
