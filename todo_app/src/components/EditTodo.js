@@ -42,11 +42,13 @@ const EditTodo = ({ item, handleClose, handleEditItem, show }) => {
         <Modal.Body>
           <form onSubmit={handleSubmit}>
             <div>
-              <input
-                type="text"
-                value={text}
+              <textarea
                 className="form-control"
+                value={text}
                 onChange={handleChange}
+                rows={5}
+                cols={5}
+                required
               />
             </div>
             <div>

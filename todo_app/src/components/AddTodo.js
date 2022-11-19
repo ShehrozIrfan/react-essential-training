@@ -2,31 +2,38 @@ import { useState } from "react";
 
 const AddTodo = ({ addTodo }) => {
   const [text, setText] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     //Adding some validation
     if (text.trim() === "") {
-      alert("Please enter text!");
+      setError("Todo text can't be blank!");
       return;
+    } else if (text.trim().length > 255) {
+      setError("Todo text can't be longer than 255 characters!");
+      return;
+    } else {
+      setError("");
+      addTodo(text);
+
+      setText("");
     }
-
-    addTodo(text);
-
-    setText("");
   };
 
   return (
-    <div>
+    <div className="mt-3 mb-3">
+      <div class={error ? "alert alert-danger" : ""}>{error}</div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input
-            type="text"
+          <textarea
             className="form-control"
             placeholder="Task to be done..."
             value={text}
             onChange={(e) => setText(e.target.value)}
+            rows={3}
+            cols={5}
             required
           />
         </div>
