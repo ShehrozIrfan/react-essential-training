@@ -43,8 +43,11 @@ body {
 
 .items-list-wrap {
   border-bottom: 1px solid lightgrey;
-  padding: 15px 0px;
+  padding: 15px 10px;
   align-items: center;
+  margin: 20px 0px;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
 }
 
 .pr-10 {
