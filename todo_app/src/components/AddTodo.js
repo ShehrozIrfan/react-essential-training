@@ -18,7 +18,7 @@ const AddTodo = ({ addTodo }) => {
   };
 
   return (
-    <div>
+    <div className="mt-3 mb-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <input
