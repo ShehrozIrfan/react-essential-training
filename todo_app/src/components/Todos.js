@@ -32,7 +32,7 @@ const Todos = ({
 
   return (
     <div>
-      <div className="sort-wrap">
+      <div className="sort-wrap mt-3">
         <button
           className={`btn btn-sm ${
             showStatus.showAll ? "btn-primary" : "btn-outline-primary"
@@ -99,7 +99,11 @@ const Todos = ({
               placement="bottom"
             >
               <div
-                className={item.completed ? "item-line-through" : ""}
+                className={
+                  item.completed
+                    ? "item-line-through adjust-wrap"
+                    : "adjust-wrap"
+                }
                 onDoubleClick={() => handleComplete(item.id)}
               >
                 {item.text}

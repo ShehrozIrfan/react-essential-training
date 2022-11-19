@@ -99,6 +99,10 @@ body {
   top: 6px;
 }
 
+.adjust-wrap {
+  padding: 0px 10px;
+}
+
 @media (max-width: 390px) {
   .sort-wrap button {
     font-size: 12px;

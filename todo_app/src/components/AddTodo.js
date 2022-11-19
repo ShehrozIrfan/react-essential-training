@@ -10,6 +10,9 @@ const AddTodo = ({ addTodo }) => {
     if (text.trim() === "") {
       alert("Please enter text!");
       return;
+    } else if (text.trim().length > 255) {
+      alert("Todo text can't be longer than 255 characters!");
+      return;
     }
 
     addTodo(text);
@@ -21,12 +24,13 @@ const AddTodo = ({ addTodo }) => {
     <div className="mt-3 mb-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <input
-            type="text"
+          <textarea
             className="form-control"
             placeholder="Task to be done..."
             value={text}
             onChange={(e) => setText(e.target.value)}
+            rows={3}
+            cols={5}
             required
           />
         </div>
