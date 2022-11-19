@@ -2,6 +2,9 @@ import { useState } from "react";
 import Tooltip from "react-bootstrap/Tooltip";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import _ from "lodash";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { MdSearch } from "react-icons/md";
 
 const Todos = ({
   items,
@@ -77,7 +80,7 @@ const Todos = ({
               type="submit"
               className="btn btn-primary btn-sm search-submit-btn"
             >
-              Submit
+              <MdSearch />
             </button>
           </form>
         </div>
@@ -108,7 +111,7 @@ const Todos = ({
                   className="btn btn-warning btn-sm"
                   onClick={() => handleEdit(item)}
                 >
-                  Edit
+                  <FaEdit />
                 </button>
               </div>
               <div>
@@ -116,7 +119,7 @@ const Todos = ({
                   className="btn btn-danger btn-sm"
                   onClick={() => handleDelete(item.id)}
                 >
-                  Delete
+                  <MdDelete />
                 </button>
               </div>
             </div>
